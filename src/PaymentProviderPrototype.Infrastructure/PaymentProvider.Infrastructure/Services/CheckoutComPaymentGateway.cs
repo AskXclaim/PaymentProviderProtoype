@@ -51,8 +51,8 @@ public class CheckoutComPaymentGateway : IPaymentGateway
     private ICheckoutApi GetApiBuild()
     {
         return CheckoutSdk.Builder().StaticKeys()
-            //.PublicKey("pk_sbox_vifq7ttmts42gxjkz2gnfq7y6y2")
-            .SecretKey("sk_sbox_coj3lh7xqkjsrom3m7htqzvryel")
+            //.PublicKey("")
+            .SecretKey("")
             .Environment(Environment.Sandbox)
             .HttpClientFactory(new DefaultHttpClientFactory())
             // .EnvironmentSubdomain("localhost")
