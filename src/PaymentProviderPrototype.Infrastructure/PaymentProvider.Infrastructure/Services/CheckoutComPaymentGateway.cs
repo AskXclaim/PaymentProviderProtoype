@@ -52,7 +52,7 @@ public class CheckoutComPaymentGateway : IPaymentGateway
     {
         return CheckoutSdk.Builder().StaticKeys()
             //.PublicKey("")
-            .SecretKey("")
+            // .SecretKey("")
             .Environment(Environment.Sandbox)
             .HttpClientFactory(new DefaultHttpClientFactory())
             // .EnvironmentSubdomain("localhost")
