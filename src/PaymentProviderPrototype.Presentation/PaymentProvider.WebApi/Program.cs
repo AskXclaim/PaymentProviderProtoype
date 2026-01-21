@@ -19,6 +19,7 @@ builder.Services.AddOpenApiDocument(config =>
     config.Title = "Payment-Provider-WebApi v1";
     config.Version = "v1";
 });
+builder.Services.AddScoped<IPaymentGateway, CheckoutComPaymentGateway>();
 
 var app = builder.Build();
 

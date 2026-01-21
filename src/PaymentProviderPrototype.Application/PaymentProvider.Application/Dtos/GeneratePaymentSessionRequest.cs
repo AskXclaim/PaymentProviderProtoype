@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using PaymentProvider.Application.enums;
 using PaymentProvider.Application.models;
 using PaymentProvider.Common.models;
-using PaymentProvider.Domain.Entities;
+using Customer = PaymentProvider.Application.models.Customer;
 
 namespace PaymentProvider.Application.Dtos;
 
