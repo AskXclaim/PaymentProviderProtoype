@@ -3,8 +3,10 @@ using Checkout.Common;
 using Checkout.Payments;
 using Checkout.Payments.Request;
 using Checkout.Payments.Sessions;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using PaymentProvider.Application.Dtos;
 using PaymentProvider.Application.Interfaces;
+using PaymentProvider.Common.Errors;
 using PaymentProvider.Tests.TestData;
 using Environment = Checkout.Environment;
 
@@ -15,7 +17,7 @@ public class CheckoutComPaymentGateway : IPaymentGateway
     public async Task<GeneratedPaymentSessionResponse?> GeneratePaymentSession(GeneratePaymentSessionRequest request)
     {
         if (!PaymentSessionValidator.IsCurrencyValid(request.Money.Currency))
-            throw new ArgumentException("Invalid currency");
+            throw new ProcessExitedException($"Invalid currency '{Enum.GetName(request.Money.Currency)}' provided");
 
         const Currency currency = Currency.GBP;
         try
@@ -27,32 +29,30 @@ public class CheckoutComPaymentGateway : IPaymentGateway
             var paymentResponse = FakePaymentSessionData.GetValidFakePaymentSessionResponse();
             return paymentResponse != null ? GetGeneratedPaymentSessionResponse(paymentResponse) : null;
         }
+        // Todo: We may want to treat each exception differently
         catch (CheckoutApiException exception)
         {
-          
-            throw;
+          throw new PaymentProviderError(exception.Message);
         }
-        catch (CheckoutArgumentException e)
+        catch (CheckoutArgumentException exception)
         {
-            // Bad arguments
-            throw;
+            throw new PaymentProviderError(exception.Message);
         }
-        catch (CheckoutAuthorizationException e)
+        catch (CheckoutAuthorizationException exception)
         {
-            // Invalid authorization
-            throw;
+           throw new PaymentProviderError(exception.Message);
         }
         catch (Exception exception)
         {
-            throw;
+            throw new PaymentProviderError(exception.Message);
         }
     }
 
     private ICheckoutApi GetApiBuild()
     {
         return CheckoutSdk.Builder().StaticKeys()
-            //.PublicKey("")
-            // .SecretKey("")
+            .PublicKey("pk_sbox_vifq7ttmts42gxjkz2gnfq7y6y2")
+            .SecretKey("sk_sbox_coj3lh7xqkjsrom3m7htqzvryel")
             .Environment(Environment.Sandbox)
             .HttpClientFactory(new DefaultHttpClientFactory())
             // .EnvironmentSubdomain("localhost")
