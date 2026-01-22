@@ -1,6 +1,8 @@
+using System.Runtime.Serialization;
+
 namespace PaymentProvider.Common.enums;
 
 public enum AllowedCountry
 {
-    GB=1,
+    [EnumMember(Value = "GB")]GB,
 }

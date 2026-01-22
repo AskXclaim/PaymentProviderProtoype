@@ -1,14 +1,17 @@
+using System.Runtime.Serialization;
+
 namespace PaymentProvider.Common.enums;
 
 public enum PaymentStatus
 {
-    Approved =1,
-    Cancelled = 2,
-    Captured = 3,
-    Declined = 4,
-    Expired = 5,
-    Paid = 6,
-    Pending = 7,
-    Refunded = 8,
-    Returned = 9
+    [EnumMember(Value = "Authorized")] Authorized,
+    [EnumMember(Value = "Approved")]Approved = 2,
+    [EnumMember(Value = "Canceled")]Canceled = 3,
+    [EnumMember(Value = "Captured")] Captured = 4,
+    [EnumMember(Value = "Declined")]Declined = 5,
+    [EnumMember(Value = "Expired")] Expired = 6,
+    [EnumMember(Value = "Paid")] Paid = 7,
+    [EnumMember(Value = "Pending")] Pending = 8,
+    [EnumMember(Value = "Refunded")] Refunded = 9,
+    [EnumMember(Value = "Returned")]  Returned = 10
 }

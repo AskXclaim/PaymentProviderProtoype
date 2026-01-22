@@ -1,10 +1,11 @@
+using System.Runtime.Serialization;
+
 namespace PaymentProvider.Application.enums;
 
 public enum PaymentType
 {
-    Regular=1,
-    Recurring=2,
-    MOTO=3,
-    Installment=4,
-    Unscheduled=5
+    [EnumMember(Value = "Regular")] Regular,
+    [EnumMember(Value = "Recurring")] Recurring,
+    [EnumMember(Value = "MOTO")] Moto,
+    [EnumMember(Value = "Unscheduled")] Unscheduled,
 }

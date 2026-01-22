@@ -4,7 +4,7 @@ using Environment = Checkout.Environment;
 
 namespace PaymentProvider.Infrastructure.Services.Builders;
 
-public class ApiBuilder(string secretKey, string? publicKey=null, Environment environment=Environment.Sandbox)
+public class CheckoutApiBuilder(string secretKey, string? publicKey=null, Environment environment=Environment.Sandbox)
 {
     public ICheckoutApi GetApiBuild()
     {

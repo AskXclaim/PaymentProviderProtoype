@@ -11,6 +11,7 @@ public static class PaymentEndpoints
 {
     public static RouteGroupBuilder MapPaymentEndpoints(this RouteGroupBuilder groupBuilder)
     {
+        //ToDO write a global error handler
         groupBuilder.MapPost("/GeneratePaymentSession",
             async (IPaymentGateway paymentGateway, [FromBody] GeneratePaymentSessionRequest request) =>
             {
@@ -32,6 +33,8 @@ public static class PaymentEndpoints
             {
                 try
                 {
+                    var response = await paymentGateway.GetPaymentSessionDetails(paymentSessionId);
+                    if (response != null) return new Response(response, HttpStatusCode.OK);
                 }
                 catch (PaymentProviderError error)
                 {

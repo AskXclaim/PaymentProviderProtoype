@@ -1,6 +1,8 @@
+using System.Runtime.Serialization;
+
 namespace PaymentProvider.Common.enums;
 
 public enum Currency
 {
-    GBP=1,
+    [EnumMember(Value = "GBP")] GBP,
 }

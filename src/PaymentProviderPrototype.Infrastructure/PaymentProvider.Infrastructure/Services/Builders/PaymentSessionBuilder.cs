@@ -3,6 +3,7 @@ using Checkout.Payments;
 using Checkout.Payments.Request;
 using Checkout.Payments.Sessions;
 using PaymentProvider.Application.Dtos;
+using PaymentProvider.Infrastructure.Services.Validators;
 
 namespace PaymentProvider.Infrastructure.Services.Builders;
 
