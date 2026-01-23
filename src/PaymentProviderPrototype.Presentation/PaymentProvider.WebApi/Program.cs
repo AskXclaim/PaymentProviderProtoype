@@ -1,6 +1,7 @@
 using PaymentProvider.Application.Interfaces;
 using PaymentProvider.Infrastructure.Services;
 using PaymentProvider.WebApi;
+using PaymentProvider.WebApi.Exceptions_ExceptionHandlers;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ builder.Services.AddOpenApiDocument(config =>
     config.Version = "v1";
 });
 builder.Services.AddScoped<IPaymentGateway, CheckoutComPaymentGateway>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -35,12 +38,10 @@ if (app.Environment.IsDevelopment())
         config.DocumentPath = "/swagger/{documentName}/swagger.json";
         config.DocExpansion = "list";
     });
-    app.MapScalarApiReference(options =>
-    {
-        options.WithTitle("Payment-Provider-WebApi");
-    });
+    app.MapScalarApiReference(options => { options.WithTitle("Payment-Provider-WebApi"); });
 }
 
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.MapGroup("/api/payments").MapPaymentEndpoints();

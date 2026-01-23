@@ -20,6 +20,6 @@ public class CheckoutComPaymentGateway : IPaymentGateway
     public async Task<GeneratedPaymentSessionResponse?> GeneratePaymentSession(GeneratePaymentSessionRequest request) =>
         await _paymentFactory.GetResult(request) as GeneratedPaymentSessionResponse;
 
-    public async Task<PaymentSessionDetailResponse?> GetPaymentSessionDetails(string paymentSessionId) =>
-        await _paymentFactory.GetResult(paymentSessionId) as PaymentSessionDetailResponse;
+    public async Task<PaymentSessionDetailResponse?> GetPaymentSessionDetails(PaymentSessionDetailRequest request) =>
+        await _paymentFactory.GetResult(request) as PaymentSessionDetailResponse;
 }

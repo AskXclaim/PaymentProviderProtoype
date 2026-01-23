@@ -1,6 +1,8 @@
+using System.Net;
 using Checkout;
 using Checkout.Common;
 using PaymentProvider.Application.Dtos;
+using PaymentProvider.Common.Errors;
 using PaymentProvider.Infrastructure.Services.Builders;
 using PaymentProvider.Infrastructure.Services.Validators;
 using PaymentProvider.Tests.TestData;
@@ -12,8 +14,9 @@ public class GeneratePaymentSession(ICheckoutApi apiBuild)
     public async Task<GeneratedPaymentSessionResponse?> GetResult(GeneratePaymentSessionRequest request)
     {
         if (!PaymentSessionValidator.IsCurrencyValid(request.Money.Currency))
-            throw new ArgumentException($"Invalid currency '{Enum.GetName(request.Money.Currency)}' provided");
-        
+            throw new PaymentProviderException($"Invalid currency '{Enum.GetName(request.Money.Currency)}' provided",
+                HttpStatusCode.BadRequest);
+
         const Currency currency = Currency.GBP;
         var builder = new PaymentSessionBuilder();
         var paymentSessionRequest = builder.GetPaymentSessionsRequest(request, currency);

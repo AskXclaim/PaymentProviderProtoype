@@ -18,30 +18,35 @@ public class CheckoutPaymentMethodFactory(ICheckoutApi apiBuilder) : IFactory
                 case nameof(GeneratePaymentSessionRequest):
                     var generatePaymentSession = new GeneratePaymentSession(apiBuilder);
                     return await generatePaymentSession.GetResult((GeneratePaymentSessionRequest)request);
-                case GetPaymentSessionDetails.PaymentSessionId:
+                case nameof(PaymentSessionDetailRequest):
                     var getPaymentSessionDetails = new GetPaymentSessionDetails(apiBuilder);
-                    return await getPaymentSessionDetails.GetResult((string)request);
+                    return await getPaymentSessionDetails.GetResult(((PaymentSessionDetailRequest)request)
+                        .PaymentSessionId);
                 default:
-                    throw new PaymentProviderError($"Unknown request type {request.GetType().Name}",
+                    throw new PaymentProviderException($"Unknown request type {request.GetType().Name}",
                         HttpStatusCode.InternalServerError);
             }
         }
         // Todo: We may want to treat each exception differently
         catch (CheckoutApiException exception)
         {
-            throw new PaymentProviderError(exception.Message, exception.HttpStatusCode);
+            throw new PaymentProviderException(exception.Message, exception.HttpStatusCode);
         }
         catch (CheckoutArgumentException exception)
         {
-            throw new PaymentProviderError(exception.Message, HttpStatusCode.InternalServerError);
+            throw new PaymentProviderException(exception.Message, HttpStatusCode.InternalServerError);
         }
         catch (CheckoutAuthorizationException exception)
         {
-            throw new PaymentProviderError(exception.Message, HttpStatusCode.Unauthorized);
+            throw new PaymentProviderException(exception.Message, HttpStatusCode.Unauthorized);
+        }
+        catch (PaymentProviderException exception)
+        {
+            throw new PaymentProviderException(exception.Message, exception.HttpStatusCode);
         }
         catch (Exception exception)
         {
-            throw new PaymentProviderError(exception.Message, HttpStatusCode.InternalServerError);
+            throw new Exception(exception.Message);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Net;
 using Checkout;
 using Checkout.Common;
 using Checkout.Payments.Response;
@@ -5,6 +6,7 @@ using PaymentProvider.Application.Dtos;
 using PaymentProvider.Application.enums;
 using PaymentProvider.Application.models;
 using PaymentProvider.Common.enums;
+using PaymentProvider.Common.Errors;
 using PaymentProvider.Common.models;
 using PaymentProvider.Infrastructure.Services.Validators;
 using Currency = Checkout.Common.Currency;
@@ -13,16 +15,17 @@ namespace PaymentProvider.Infrastructure.Services.Factories.FactoryItems;
 
 public class GetPaymentSessionDetails(ICheckoutApi apiBuild)
 {
-    public const string PaymentSessionId = "paymentSessionId";
     public async Task<PaymentSessionDetailResponse?> GetResult(string paymentSessionId)
     {
         if (!PaymentSessionValidator.IsPaymentSessionIdValid(paymentSessionId))
-            throw new ArgumentException($"{nameof(paymentSessionId)} cannot be null or whitespace.");
+            throw new PaymentProviderException
+                ($"Please provide a valid {nameof(paymentSessionId)}.",HttpStatusCode.BadRequest);
 
         var result = await apiBuild.PaymentsClient().GetPaymentDetails(paymentSessionId);
 
         if (result is null)
-            throw new Exception($"No null result gotten from GetPaymentDetails");
+            throw new PaymentProviderException
+                ($"Null result gotten from GetPaymentDetails", HttpStatusCode.InternalServerError);
 
         var response = ParseResponse(result);
         return response;
