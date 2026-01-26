@@ -1,7 +1,10 @@
 using System.Net;
 using Checkout;
 using Checkout.Common;
+using Checkout.Payments;
+using Checkout.Payments.Response;
 using Checkout.Payments.Sessions;
+using PaymentProvider.Application.Dtos;
 
 namespace PaymentProvider.Tests.TestData;
 
@@ -25,12 +28,55 @@ public static class FakePaymentSessionData
         };
     }
 
-    public static CheckoutApiException GetInvalidFakePaymentSessionResponse()
+    public static GetPaymentResponse? GetValidFakeGetPaymentDetailResponse()
     {
-        return new CheckoutApiException("f4b05807-97d0-4e51-96c8-326bf3953af1",
+        return new GetPaymentResponse
+        {
+            Id = "pay_mbabizu24mvu3mela5njyhpit4",
+            RequestedOn = DateTime.UtcNow,
+            Amount = 123,
+            Currency = Currency.GBP,
+            Status = PaymentStatus.Authorized,
+            Approved = true,
+            Links = new Dictionary<string, Link>
+            {
+                {
+                    "self", new Link
+                    {
+                        Href = "https://{prefix}.api.checkout.com/payments/pay_y3oqhf46pyzuxjbcn2giaqnb44"
+                    }
+                },
+                {
+                    "actions", new Link
+                    {
+                        Href = "https://{prefix}.api.checkout.com/payments/pay_y3oqhf46pyzuxjbcn2giaqnb44/actions"
+                    }
+                },
+            },
+            Customer = new CustomerResponse()
+            {
+                Name = "John Doe",
+                Email = "john.doe@gmail.com",
+                Phone = new Phone()
+                {
+                    CountryCode = "44", Number = "000111222"
+                }
+            },
+            PaymentType = PaymentType.Regular,
+            Reference = "Our-Reference",
+        };
+    }
+
+    public static CheckoutApiException GetInvalidFakeCheckoutApiException() =>
+        new("f4b05807-97d0-4e51-96c8-326bf3953af1",
             HttpStatusCode.BadRequest, new Dictionary<string, object>()
             {
                 { "validation_error", "[\n  \"processing_channel_id_required\"\n]" }
             });
-    }
+
+    public static CheckoutArgumentException GetInvalidFakeCheckoutArgumentException() =>
+        new("An error occurred - CheckoutArgumentException");
+
+    public static CheckoutArgumentException GetInvalidFakeCheckoutAuthorizationException() =>
+        new("An error occurred - CheckoutAuthorizationException");
 }

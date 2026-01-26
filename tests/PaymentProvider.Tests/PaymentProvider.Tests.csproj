@@ -25,4 +25,8 @@
       <Folder Include="Unit.Tests\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\PaymentProviderPrototype.Application\PaymentProvider.Application\PaymentProvider.Application.csproj" />
+    </ItemGroup>
+
 </Project>
