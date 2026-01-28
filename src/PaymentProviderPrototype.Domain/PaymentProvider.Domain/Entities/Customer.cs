@@ -2,7 +2,7 @@ namespace PaymentProvider.Domain.Entities;
 
 public class Customer
 {
-    public string FirstName { get; init; }
-    public string LastName { get; init; }   
-    public string Email { get; init; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }   
+    public string Email { get; set; }
 }

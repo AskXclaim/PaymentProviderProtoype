@@ -1,6 +1,9 @@
+using System.Runtime.Serialization;
+
 namespace PaymentProvider.Application.enums;
 
 public enum Locale
 {
-    en_GB=1
+    [EnumMember(Value =  "en_GB")]
+    EnGb=1
 }

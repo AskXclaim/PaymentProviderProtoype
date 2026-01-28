@@ -1,18 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>Lbg.PaymentProviderPrototype.PaymentGateway</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>MysticRed-BlackOps</Authors>
+        <Product>PaymentGateway</Product>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\tests\PaymentProvider.Tests\PaymentProvider.Tests.csproj" />
-      <ProjectReference Include="..\..\PaymentProviderPrototype.Application\PaymentProvider.Application\PaymentProvider.Application.csproj" />
+        <ProjectReference Include="..\..\PaymentProviderPrototype.Application\PaymentProvider.Application\PaymentProvider.Application.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="CheckoutSDK" Version="4.17.0" />
+        <PackageReference Include="CheckoutSDK" Version="4.17.0"/>
     </ItemGroup>
 
 </Project>

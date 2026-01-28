@@ -4,15 +4,15 @@ namespace PaymentProvider.Application.Dtos;
 
 public class PaymentSessionDetailResponse
 {
-    public string Id { get; init; }
-    public string Reference { get; init; }
-    public DateTime? RequestedOn { get; init; }
-    public MoneyDto Amount { get; init; }
-    public string? Status { get; init; }
-    public bool? IsApproved { get; init; }
-    public string? PaymentType { get; init; }
-    public string AuthenticationType { get; init; }
-    public Customer Customer { get; init; }
+    public string Id { get; set; }
+    public string Reference { get; set; }
+    public DateTime? RequestedOn { get; set; }
+    public MoneyDto Amount { get; set; }
+    public string? Status { get; set; }
+    public bool? IsApproved { get; set; }
+    public string? PaymentType { get; set; }
+    public string AuthenticationType { get; set; }
+    public Customer Customer { get; set; }
 
     public PaymentSessionDetailResponse()
     {

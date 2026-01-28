@@ -1,9 +1,15 @@
+using System.Runtime.Serialization;
+
 namespace PaymentProvider.Application.enums;
 
 public enum PaymentMethod
 {
-    card=1,
-    applepay=2,
-    googlepay=3,
-    paypal=4
+    [EnumMember(Value = "card")]
+    Card=1,
+    [EnumMember(Value = "applepay")]
+    ApplePay=2,
+    [EnumMember(Value = "googlepay")]
+    GooglePay=3,
+    [EnumMember(Value = "paypal")]
+    Paypal=4
 }

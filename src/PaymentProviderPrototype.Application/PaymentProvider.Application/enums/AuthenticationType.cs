@@ -1,7 +1,9 @@
+using System.Runtime.Serialization;
+
 namespace PaymentProvider.Application.enums;
 
-public static class AuthenticationType
+public enum AuthenticationType
 {
-    public const string ThreeDSecure = "3ds";
-    public const string GoogleSpa = "google_spa";
+    [EnumMember(Value = "3ds")] ThreeDSecure=1,
+    [EnumMember(Value = "google_spa")] GoogleSpa=2
 }

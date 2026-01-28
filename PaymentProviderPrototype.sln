@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentProvider.WebApi", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentProvider.Tests", "tests\PaymentProvider.Tests\PaymentProvider.Tests.csproj", "{C06ADFE3-679B-40E8-B562-4D8F4843F83D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentProvider.TestNugetPackage", "src\PaymentProviderPrototype.TestNugetPackage\PaymentProvider.TestNugetPackage\PaymentProvider.TestNugetPackage\PaymentProvider.TestNugetPackage.csproj", "{1A028943-97B2-4E04-817D-3FD462CD42BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{C06ADFE3-679B-40E8-B562-4D8F4843F83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C06ADFE3-679B-40E8-B562-4D8F4843F83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C06ADFE3-679B-40E8-B562-4D8F4843F83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A028943-97B2-4E04-817D-3FD462CD42BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A028943-97B2-4E04-817D-3FD462CD42BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A028943-97B2-4E04-817D-3FD462CD42BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A028943-97B2-4E04-817D-3FD462CD42BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

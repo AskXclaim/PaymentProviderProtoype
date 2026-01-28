@@ -6,7 +6,7 @@ namespace PaymentProvider.Domain.Entities;
 
 public class Payment
 {
-    public Money Money { get; init; } = new Money(0.00M, Currency.GBP);
-    public string Reference { get; init; }
-    public Address BillingAddress { get; init; }
+    public Money Money { get; set; } = new Money(0.00M, Currency.GBP);
+    public string Reference { get; set; }
+    public Address BillingAddress { get; set; }
 }

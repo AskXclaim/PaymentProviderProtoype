@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using PaymentProvider.Application.enums;
 using PaymentProvider.Application.models;
 using PaymentProvider.Common.models;
@@ -16,31 +15,31 @@ public class GeneratePaymentSessionRequest(
     BillingDescriptor billingDescriptor,
     Customer customer,
     string displayName,
-    Locale locale = Locale.en_GB,
+    Locale locale = Locale.EnGb,
     bool enable3Ds = true)
 {
-    public Money Money { get; init; } = money;
-    public BillingDetails BillingDetails { get; init; } = billingDetails;
-    [Url] public string SuccessUrl { get; init; } = successUrl;
-    [Url] public string FailureUrl { get; init; } = failureUrl;
+    public Money Money { get; set; } = money;
+    public BillingDetails BillingDetails { get; set; } = billingDetails;
+    public string SuccessUrl { get; set; } = successUrl;
+    public string FailureUrl { get; set; } = failureUrl;
 
     //These are optional though I think would be really useful for us to have
-    public PaymentType PaymentType { get; init; }
+    public PaymentType PaymentType { get; set; }
 
     //string <= 50 characters
     //A reference you can use to identify the payment. For example, an order number.
-    public string Reference { get; init; } = reference;
-    public BillingDescriptor BillingDescriptor { get; init; } = billingDescriptor;
-    public Customer Customer { get; init; } = customer;
+    public string Reference { get; set; } = reference;
+    public BillingDescriptor BillingDescriptor { get; set; } = billingDescriptor;
+    public Customer Customer { get; set; } = customer;
 
     //string <= 255 characters. The merchant's display name.
-    public string DisplayName { get; init; } = displayName;
-    public Locale Locale { get; init; } = locale;
-    public bool Enable3Ds { get; init; } = enable3Ds;
+    public string DisplayName { get; set; } = displayName;
+    public Locale Locale { get; set; } = locale;
+    public bool Enable3Ds { get; set; } = enable3Ds;
 
-    public IEnumerable<PaymentMethod> EnabledPaymentMethods { get; init; }
+    public IEnumerable<PaymentMethod> EnabledPaymentMethods { get; set; }
         = new List<PaymentMethod>
         {
-            PaymentMethod.card
+            PaymentMethod.Card
         };
 }

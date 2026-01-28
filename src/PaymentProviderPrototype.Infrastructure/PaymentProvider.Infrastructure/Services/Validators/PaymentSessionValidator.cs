@@ -1,5 +1,7 @@
+using System;
 using System.Text.RegularExpressions;
 using Checkout.Common;
+using PaymentProvider.Common;
 using PaymentProvider.Common.enums;
 using Currency = Checkout.Common.Currency;
 
@@ -8,7 +10,7 @@ namespace PaymentProvider.Infrastructure.Services.Validators;
 public static class PaymentSessionValidator
 {
     public static bool IsCurrencyValid(Common.enums.Currency currency) =>
-        Enum.GetName(currency)?.ToUpper() == Enum.GetName(Currency.GBP)?.ToUpper();
+        Enum.GetName(GlobalMethods.ParseEnum<Currency>(currency.ToString())) !=null ;
 
     public static CountryCode GetCountryCode(AllowedCountry allowedCountry)
     {

@@ -4,6 +4,6 @@ namespace PaymentProvider.Common.models;
 
 public class Money(decimal amount, Currency currency)
 {
-    public decimal Amount { get; init; } = amount;
-    public Currency Currency { get; init; } = currency;
+    public decimal Amount { get; set; } = amount;
+    public Currency Currency { get; set; } = currency;
 }

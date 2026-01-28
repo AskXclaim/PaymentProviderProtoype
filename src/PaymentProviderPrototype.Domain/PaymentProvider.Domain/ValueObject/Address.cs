@@ -10,10 +10,10 @@ public class Address(
     AllowedCountry country,
     string postalCode)
 {
-    public string AddressLineOne { get; init; } = addressLineOne;
-    public string AddressLineTwo { get; init; } = addressLineTwo;
-    public string City { get; init; } = city;
-    public string County { get; init; } = county;
-    public AllowedCountry Country { get; init; } = country;
-    public string PostalCode { get; init; } = postalCode;
+    public string AddressLineOne { get; set; } = addressLineOne;
+    public string AddressLineTwo { get; set; } = addressLineTwo;
+    public string City { get; set; } = city;
+    public string County { get; set; } = county;
+    public AllowedCountry Country { get; set; } = country;
+    public string PostalCode { get; set; } = postalCode;
 }

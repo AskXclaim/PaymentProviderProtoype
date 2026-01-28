@@ -49,7 +49,7 @@ public class PaymentSessionBuilder
                 Name = $"{request.Customer.FirstName} {request.Customer.LastName}",
                 Email = request.Customer.Email,
             },
-            ProcessingChannelId = "pc_dkgoofpvuwuerekvd4ssr6jwom",
+            ProcessingChannelId = "pc_fwdyyfyhcldu3ahc7w5gqbb4im",
             PaymentType = PaymentType.Recurring,
             SuccessUrl = "Http://localhost/successfUrl.com",
             FailureUrl = "Http://localhost/failureUrl.com",

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PaymentProvider.Application.Dtos;
 using PaymentProvider.Application.Interfaces;
 using PaymentProvider.Common.models;
-
+using Lbg.PaymentProviderPrototype.PaymentGateway;
 namespace PaymentProvider.WebApi;
 
 public static class PaymentEndpoints

@@ -1,14 +1,16 @@
+using System;
 using System.Net;
+using System.Threading.Tasks;
 using Checkout;
 using Checkout.Common;
 using Checkout.Payments.Response;
 using PaymentProvider.Application.Dtos;
 using PaymentProvider.Application.enums;
 using PaymentProvider.Application.models;
+using PaymentProvider.Common;
 using PaymentProvider.Common.enums;
 using PaymentProvider.Common.Errors;
 using PaymentProvider.Infrastructure.Services.Validators;
-using PaymentProvider.Tests.TestData;
 using Currency = Checkout.Common.Currency;
 
 namespace PaymentProvider.Infrastructure.Services.Factories.FactoryItems;
@@ -21,8 +23,8 @@ public class GetPaymentSessionDetails(ICheckoutApi apiBuild)
             throw new PaymentProviderException
                 ($"Please provide a valid {nameof(paymentSessionId)}.", HttpStatusCode.BadRequest);
 
-        //var result = await apiBuild.PaymentsClient().GetPaymentDetails(paymentSessionId);
-        var result = FakePaymentSessionData.GetValidFakeGetPaymentDetailResponse();
+        var result = await apiBuild.PaymentsClient().GetPaymentDetails(paymentSessionId);
+        //var result = FakePaymentSessionData.GetValidFakeGetPaymentDetailResponse();
 
         if (result is null)
             throw new PaymentProviderException
@@ -53,16 +55,16 @@ public class GetPaymentSessionDetails(ICheckoutApi apiBuild)
         if (amount.HasValue) anAmount = amount.Value;
 
         if (currency.HasValue)
-            aCurrency = ParseEnum<Common.enums.Currency>(currency.Value.ToString());
+            aCurrency = GlobalMethods.ParseEnum<Common.enums.Currency>(currency.Value.ToString());
 
         return new MoneyDto(anAmount, Enum.GetName(aCurrency));
     }
 
     private string? ParsePaymentStatus(Checkout.Payments.PaymentStatus? status)
-        => status is null ? null : Enum.GetName(ParseEnum<PaymentStatus>(status.Value.ToString()));
+        => status is null ? null : Enum.GetName(GlobalMethods.ParseEnum<PaymentStatus>(status.Value.ToString()));
 
     private string? ParsePaymentType(Checkout.Payments.PaymentType? paymentType)
-        => paymentType is null ? null : Enum.GetName(ParseEnum<PaymentType>(paymentType.Value.ToString()));
+        => paymentType is null ? null : Enum.GetName(GlobalMethods.ParseEnum<PaymentType>(paymentType.Value.ToString()));
 
     private Customer ParseCustomer(CustomerResponse customer) =>
         new()
@@ -73,6 +75,5 @@ public class GetPaymentSessionDetails(ICheckoutApi apiBuild)
             Email = customer.Email
         };
 
-    private TEnum ParseEnum<TEnum>(string value)
-        where TEnum : struct, Enum => Enum.Parse<TEnum>(value);
+ 
 }

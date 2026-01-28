@@ -1,11 +1,12 @@
+using System;
 using System.Net;
+using System.Threading.Tasks;
 using Checkout;
 using Checkout.Common;
 using PaymentProvider.Application.Dtos;
 using PaymentProvider.Common.Errors;
 using PaymentProvider.Infrastructure.Services.Builders;
 using PaymentProvider.Infrastructure.Services.Validators;
-using PaymentProvider.Tests.TestData;
 
 namespace PaymentProvider.Infrastructure.Services.Factories.FactoryItems;
 
@@ -20,9 +21,9 @@ public class GeneratePaymentSession(ICheckoutApi apiBuild)
         const Currency currency = Currency.GBP;
         var builder = new PaymentSessionBuilder();
         var paymentSessionRequest = builder.GetPaymentSessionsRequest(request, currency);
-        // var paymentResponse = await apiBuild.PaymentSessionsClient().RequestPaymentSessions
-        //     (paymentSessionRequest);
-        var paymentResponse = FakePaymentSessionData.GetValidFakePaymentSessionResponse();
+        var paymentResponse = await apiBuild.PaymentSessionsClient().RequestPaymentSessions
+            (paymentSessionRequest);
+        //  var paymentResponse = FakePaymentSessionData.GetValidFakePaymentSessionResponse();
         return paymentResponse != null ? builder.GetGeneratedPaymentSessionResponse(paymentResponse) : null;
     }
 }
