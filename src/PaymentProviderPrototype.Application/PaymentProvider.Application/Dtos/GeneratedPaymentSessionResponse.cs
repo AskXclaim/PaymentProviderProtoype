@@ -2,12 +2,15 @@ namespace PaymentProvider.Application.Dtos;
 
 public class GeneratedPaymentSessionResponse
 {
-    public string Id { get; private set; }
-    public string Token { get; private set; }
-    public string Secret { get; private set; }
-    public string Href { get; private set; }
+    public string Id { get; }
+    public string Token { get; }
+    public string Secret { get; }
+    public string Href { get; }
 
-    public GeneratedPaymentSessionResponse() { }
+    public GeneratedPaymentSessionResponse()
+    {
+    }   
+
     public GeneratedPaymentSessionResponse(string id, string token, string secret, string href)
     {
         Id = id;

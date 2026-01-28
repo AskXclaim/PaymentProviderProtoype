@@ -1,6 +1,4 @@
-using System;
 using System.Net;
-using System.Threading.Tasks;
 using Checkout;
 using Checkout.Common;
 using Checkout.Payments.Response;

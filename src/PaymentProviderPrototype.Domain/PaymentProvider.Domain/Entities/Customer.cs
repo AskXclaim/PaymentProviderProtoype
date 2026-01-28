@@ -1,8 +1,8 @@
 namespace PaymentProvider.Domain.Entities;
 
-public class Customer
+public class Customer(string firstName, string lastName, string email)
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }   
-    public string Email { get; set; }
+    public string FirstName { get;  } = firstName;
+    public string LastName { get;  } = lastName;
+    public string Email { get; } = email;
 }

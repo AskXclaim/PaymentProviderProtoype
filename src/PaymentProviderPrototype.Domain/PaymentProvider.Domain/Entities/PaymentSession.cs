@@ -4,7 +4,7 @@ namespace PaymentProvider.Domain.Entities;
 
 public class PaymentSession(string sessionId, string redirectUrl, Money money)
 {
-    public string SessionId { get; set; } = sessionId;
-    public string RedirectUrl { get; set; } = redirectUrl;
-    public Money Amount { get; set; } = money;
+    public string SessionId { get; } = sessionId;
+    public string RedirectUrl { get; } = redirectUrl;
+    public Money Amount { get; } = money;
 }

@@ -8,6 +8,7 @@
         <Version>1.0.0</Version>
         <Authors>MysticRed-BlackOps</Authors>
         <Product>PaymentGateway</Product>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

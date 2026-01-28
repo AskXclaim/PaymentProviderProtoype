@@ -1,4 +1,3 @@
-using System;
 using System.Text.RegularExpressions;
 using Checkout.Common;
 using PaymentProvider.Common;

@@ -49,8 +49,9 @@ public class PaymentSessionBuilder
                 Name = $"{request.Customer.FirstName} {request.Customer.LastName}",
                 Email = request.Customer.Email,
             },
-            ProcessingChannelId = "pc_fwdyyfyhcldu3ahc7w5gqbb4im",
+            ProcessingChannelId = request.ProcessingChannelId,
             PaymentType = PaymentType.Recurring,
+            //TODO: Add properties to request to populate these
             SuccessUrl = "Http://localhost/successfUrl.com",
             FailureUrl = "Http://localhost/failureUrl.com",
         };
@@ -60,9 +61,9 @@ public class PaymentSessionBuilder
         PaymentSessionsResponse paymentResponse)
     {
         return new GeneratedPaymentSessionResponse
-        {
-            Id = paymentResponse.Id, Secret = paymentResponse.PaymentSessionSecret,
-            Token = paymentResponse.PaymentSessionToken, Href = paymentResponse.GetSelfLink().Href
-        };
+        (
+            paymentResponse.Id, paymentResponse.PaymentSessionSecret,
+            paymentResponse.PaymentSessionToken, paymentResponse.GetSelfLink().Href
+        );
     }
 }

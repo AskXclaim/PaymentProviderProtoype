@@ -4,7 +4,6 @@ using Checkout.Common;
 using Checkout.Payments;
 using Checkout.Payments.Response;
 using Checkout.Payments.Sessions;
-using PaymentProvider.Application.Dtos;
 
 namespace PaymentProvider.Tests.TestData;
 

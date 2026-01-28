@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace PaymentProvider.Infrastructure.Services.Factories.Interfaces;
 
 public interface IFactory

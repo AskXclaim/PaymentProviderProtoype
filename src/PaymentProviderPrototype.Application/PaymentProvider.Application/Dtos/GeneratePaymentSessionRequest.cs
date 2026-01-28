@@ -7,6 +7,7 @@ using Customer = PaymentProvider.Application.models.Customer;
 namespace PaymentProvider.Application.Dtos;
 
 public class GeneratePaymentSessionRequest(
+    string processingChannelId,
     BillingDetails billingDetails,
     Money money,
     string successUrl,
@@ -18,6 +19,7 @@ public class GeneratePaymentSessionRequest(
     Locale locale = Locale.EnGb,
     bool enable3Ds = true)
 {
+    public string ProcessingChannelId { get; } = processingChannelId;
     public Money Money { get; set; } = money;
     public BillingDetails BillingDetails { get; set; } = billingDetails;
     public string SuccessUrl { get; set; } = successUrl;
