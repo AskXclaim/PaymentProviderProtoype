@@ -9,11 +9,11 @@ namespace PaymentProvider.Infrastructure.Services.Validators;
 public static class PaymentSessionValidator
 {
     public static bool IsCurrencyValid(Common.enums.Currency currency) =>
-        Enum.GetName(GlobalMethods.ParseEnum<Currency>(currency.ToString())) !=null ;
+        GlobalMethods.ParseEnum<Currency>(currency.ToString()).ToString() != null;
 
     public static CountryCode GetCountryCode(AllowedCountry allowedCountry)
     {
-        return Enum.GetName(allowedCountry)?.ToUpper() switch
+        return allowedCountry.ToString().ToUpper() switch
         {
             nameof(CountryCode) => CountryCode.GB,
             _ => CountryCode.GB

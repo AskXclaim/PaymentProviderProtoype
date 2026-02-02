@@ -22,14 +22,12 @@ public class GetPaymentSessionDetails(ICheckoutApi apiBuild)
                 ($"Please provide a valid {nameof(paymentSessionId)}.", HttpStatusCode.BadRequest);
 
         var result = await apiBuild.PaymentsClient().GetPaymentDetails(paymentSessionId);
-        //var result = FakePaymentSessionData.GetValidFakeGetPaymentDetailResponse();
 
         if (result is null)
             throw new PaymentProviderException
                 ($"Null result gotten from GetPaymentDetails", HttpStatusCode.InternalServerError);
 
-        var response = ParseResponse(result);
-        return response;
+        return ParseResponse(result);
     }
 
     private PaymentSessionDetailResponse ParseResponse(GetPaymentResponse result)
@@ -55,14 +53,19 @@ public class GetPaymentSessionDetails(ICheckoutApi apiBuild)
         if (currency.HasValue)
             aCurrency = GlobalMethods.ParseEnum<Common.enums.Currency>(currency.Value.ToString());
 
-        return new MoneyDto(anAmount, Enum.GetName(aCurrency));
+        return new MoneyDto(anAmount, aCurrency.ToString());
     }
 
     private string? ParsePaymentStatus(Checkout.Payments.PaymentStatus? status)
-        => status is null ? null : Enum.GetName(GlobalMethods.ParseEnum<PaymentStatus>(status.Value.ToString()));
+        => status is null
+            ? null
+            : GlobalMethods.ParseEnum<PaymentStatus>
+                (status.Value.ToString()).ToString();
 
     private string? ParsePaymentType(Checkout.Payments.PaymentType? paymentType)
-        => paymentType is null ? null : Enum.GetName(GlobalMethods.ParseEnum<PaymentType>(paymentType.Value.ToString()));
+        => paymentType is null
+            ? null
+            : GlobalMethods.ParseEnum<PaymentType>(paymentType.Value.ToString()).ToString();
 
     private Customer ParseCustomer(CustomerResponse customer) =>
         new()
@@ -72,6 +75,4 @@ public class GetPaymentSessionDetails(ICheckoutApi apiBuild)
             LastName = customer.Name,
             Email = customer.Email
         };
-
- 
 }

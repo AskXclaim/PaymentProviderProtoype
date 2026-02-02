@@ -3,19 +3,22 @@ using Checkout.Payments;
 using Checkout.Payments.Request;
 using Checkout.Payments.Sessions;
 using PaymentProvider.Application.Dtos;
+using PaymentProvider.Common;
 using PaymentProvider.Infrastructure.Services.Validators;
 
 namespace PaymentProvider.Infrastructure.Services.Builders;
 
 public class PaymentSessionBuilder
 {
+    private const string CountryCode = "44";
+
     public PaymentSessionsRequest GetPaymentSessionsRequest
-        (GeneratePaymentSessionRequest request, Currency currency)
+        (GeneratePaymentSessionRequest request)
     {
         return new PaymentSessionsRequest
         {
             Amount = (long)request.Money.Amount,
-            Currency = currency,
+            Currency = GlobalMethods.ParseEnum<Currency>(request.Money.Currency.ToString()),
             Billing = new BillingInformation
             {
                 Address = new Address
@@ -28,8 +31,8 @@ public class PaymentSessionBuilder
                 },
                 Phone = new Phone
                 {
-                    CountryCode = "44",
-                    Number = request.BillingDetails.Phone,
+                    CountryCode = CountryCode,
+                    Number = request.BillingDetails.Phone
                 }
             },
             ThreeDs = new ThreeDsRequest()
@@ -47,13 +50,12 @@ public class PaymentSessionBuilder
             Customer = new PaymentCustomerRequest()
             {
                 Name = $"{request.Customer.FirstName} {request.Customer.LastName}",
-                Email = request.Customer.Email,
+                Email = request.Customer.Email
             },
             ProcessingChannelId = request.ProcessingChannelId,
-            PaymentType = PaymentType.Recurring,
-            //TODO: Add properties to request to populate these
-            SuccessUrl = "Http://localhost/successfUrl.com",
-            FailureUrl = "Http://localhost/failureUrl.com",
+            PaymentType = GlobalMethods.ParseEnum<PaymentType>(request.PaymentType.ToString()),
+            SuccessUrl = request.SuccessUrl,
+            FailureUrl = request.FailureUrl
         };
     }
 

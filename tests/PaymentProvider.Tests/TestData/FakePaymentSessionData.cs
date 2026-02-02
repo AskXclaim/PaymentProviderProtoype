@@ -50,7 +50,7 @@ public static class FakePaymentSessionData
                     {
                         Href = "https://{prefix}.api.checkout.com/payments/pay_y3oqhf46pyzuxjbcn2giaqnb44/actions"
                     }
-                },
+                }
             },
             Customer = new CustomerResponse()
             {
@@ -62,7 +62,7 @@ public static class FakePaymentSessionData
                 }
             },
             PaymentType = PaymentType.Regular,
-            Reference = "Our-Reference",
+            Reference = "Our-Reference"
         };
     }
 

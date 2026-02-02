@@ -4,5 +4,5 @@ namespace PaymentProvider.Common.enums;
 
 public enum AllowedCountry
 {
-    [EnumMember(Value = "GB")]GB,
+    [EnumMember(Value = "GB")]GB
 }

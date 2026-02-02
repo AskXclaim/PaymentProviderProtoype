@@ -26,7 +26,7 @@ public class GeneratePaymentSessionRequest(
     public string FailureUrl { get; set; } = failureUrl;
 
     //These are optional though I think would be really useful for us to have
-    public PaymentType PaymentType { get; set; }
+    public PaymentType PaymentType { get; set; } = PaymentType.Unscheduled;
 
     //string <= 50 characters
     //A reference you can use to identify the payment. For example, an order number.
@@ -38,6 +38,7 @@ public class GeneratePaymentSessionRequest(
     public string DisplayName { get; set; } = displayName;
     public Locale Locale { get; set; } = locale;
     public bool Enable3Ds { get; set; } = enable3Ds;
+    
 
     public IEnumerable<PaymentMethod> EnabledPaymentMethods { get; set; }
         = new List<PaymentMethod>
