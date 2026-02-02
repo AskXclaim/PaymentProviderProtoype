@@ -10,7 +10,7 @@ namespace PaymentProvider.Infrastructure.Services;
 public class CheckoutComPaymentGateway : IPaymentGateway
 {
     private readonly ICheckoutApi _apiBuild =
-        new CheckoutApiBuilder("sk_sbox_as7ulrspgziwz2aqgwwagixm2mj").GetApiBuild();
+        new CheckoutApiBuilder("").GetApiBuild();
 
     private readonly IFactory _paymentFactory;
 
